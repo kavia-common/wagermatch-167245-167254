@@ -27,6 +27,7 @@ function App() {
           {theme === 'light' ? '🌙 Dark' : '☀️ Light'}
         </button>
         <img src={logo} className="App-logo" alt="logo" />
+        <h1 style={{ marginTop: 16, marginBottom: 8 }}>gamefinder</h1>
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
