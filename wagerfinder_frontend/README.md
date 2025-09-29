@@ -1,82 +1,29 @@
-# Lightweight React Template for KAVIA
+# gamefinder Frontend
 
-This project provides a minimal React template with a clean, modern UI and minimal dependencies.
+Modern React UI for locating and challenging nearby players across multiple game categories.
 
-## Features
+## Highlights
+- Ocean Professional theme (blue primary, amber accents)
+- Mocked authentication (login/signup)
+- Filter/search (distance slider, match type, search input, game-specific for video games)
+- Category tabs (8 Ball, Poker, Blackjack, Bowling, Basketball, Sprinting, Video Games)
+- Lists of local users and open challenges with action buttons
+- Challenge creation modal (opponent, category, game, match type, wager, notes)
+- Match history for the user
+- Responsive, rounded corners, subtle gradients, and transitions
 
-- **Lightweight**: No heavy UI frameworks - uses only vanilla CSS and React
-- **Modern UI**: Clean, responsive design with KAVIA brand styling
-- **Fast**: Minimal dependencies for quick loading times
-- **Simple**: Easy to understand and modify
+## Scripts
+- `npm start` - Run dev server
+- `npm test` - Run tests
+- `npm run build` - Production build
 
-## Getting Started
+## Structure
+- `src/theme.js` - Theme tokens and constants (categories, videogames)
+- `src/styles.css` - Global Ocean Professional styles
+- `src/state.js` - Context providers, mocked data, and filters
+- `src/components/*` - UI components
+- `src/App.js` - Assembles the UI
 
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-### `npm test`
-
-Launches the test runner in interactive watch mode.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-## Customization
-
-### Colors
-
-The main brand colors are defined as CSS variables in `src/App.css`:
-
-```css
-:root {
-  --kavia-orange: #E87A41;
-  --kavia-dark: #1A1A1A;
-  --text-color: #ffffff;
-  --text-secondary: rgba(255, 255, 255, 0.7);
-  --border-color: rgba(255, 255, 255, 0.1);
-}
-```
-
-### Components
-
-This template uses pure HTML/CSS components instead of a UI framework. You can find component styles in `src/App.css`. 
-
-Common components include:
-- Buttons (`.btn`, `.btn-large`)
-- Container (`.container`)
-- Navigation (`.navbar`)
-- Typography (`.title`, `.subtitle`, `.description`)
-
-## Learn More
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Notes
+- All data and auth are mocked on the frontend. Replace in `state.js` and `components/Auth.js` to integrate a backend API.
+- App title and references updated to "gamefinder".

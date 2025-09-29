@@ -1,49 +1,75 @@
-import React, { useState, useEffect } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import "./styles.css";
+import { injectCSSVariables } from "./theme";
+import { Providers } from "./state";
+import Header from "./components/Header";
+import CategoryTabs from "./components/CategoryTabs";
+import FilterBar from "./components/FilterBar";
+import { UserList, ChallengeList } from "./components/Lists";
+import ChallengeModal from "./components/ChallengeModal";
+import AuthGate from "./components/Auth";
+import MatchHistory from "./components/MatchHistory";
+
+/**
+ * Root application for gamefinder
+ * - Provides Ocean Professional theme
+ * - Offers mock auth, filters, category tabs, lists, and challenge creation
+ */
 
 // PUBLIC_INTERFACE
 function App() {
-  const [theme, setTheme] = useState('light');
+  const [challengeOpen, setChallengeOpen] = useState(false);
+  const [preset, setPreset] = useState(null);
 
-  // Effect to apply theme to document element
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-  }, [theme]);
+    injectCSSVariables();
+  }, []);
 
-  // PUBLIC_INTERFACE
-  const toggleTheme = () => {
-    setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light');
+  const openChallenge = (p = null) => {
+    setPreset(p);
+    setChallengeOpen(true);
+  };
+
+  const onCreateChallenge = (payload) => {
+    // For now, just log the created challenge. Integrate with API as needed.
+    // eslint-disable-next-line no-console
+    console.log("Challenge created:", payload);
+  };
+
+  const onJoinChallenge = (id) => {
+    // eslint-disable-next-line no-console
+    console.log("Joining challenge", id);
   };
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <button 
-          className="theme-toggle" 
-          onClick={toggleTheme}
-          aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
-        >
-          {theme === 'light' ? '🌙 Dark' : '☀️ Light'}
-        </button>
-        <img src={logo} className="App-logo" alt="logo" />
-        <h1 style={{ marginTop: 16, marginBottom: 8 }}>gamefinder</h1>
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <p>
-          Current theme: <strong>{theme}</strong>
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Providers>
+      <div className="app-shell">
+        <Header onOpenChallenge={() => openChallenge(null)} />
+        <main className="app-content">
+          <AuthGate>
+            <CategoryTabs />
+            <FilterBar />
+            <div style={{ marginTop: 14, display: "grid", gap: 14 }}>
+              <section>
+                <div className="badge" style={{ marginBottom: 8 }}>Local Users</div>
+                <UserList onChallenge={(p) => openChallenge(p)} />
+              </section>
+              <section>
+                <div className="badge" style={{ marginBottom: 8 }}>Open Challenges</div>
+                <ChallengeList onJoin={onJoinChallenge} onChallenge={(p) => openChallenge(p)} />
+              </section>
+              <MatchHistory />
+            </div>
+          </AuthGate>
+        </main>
+        <ChallengeModal
+          open={challengeOpen}
+          onClose={() => setChallengeOpen(false)}
+          preset={preset}
+          onCreate={onCreateChallenge}
+        />
+      </div>
+    </Providers>
   );
 }
 
